@@ -1,8 +1,14 @@
 {
-  "name": "simple-git",
-  "displayName": "Simple Git",
+  "name": "simple-git-manager",
+  "displayName": "Simple Git Manager",
   "description": "Simple Git brings the version control experience from JetBrains IDEs straight into your VS Code.",
   "version": "0.1.0",
+  "publisher": "MarkHmnv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarkHmnv/simple-git"
+  },
+  "icon": "resources/icon.png",
   "engines": {
     "vscode": "^1.120.0"
   },
@@ -158,12 +164,12 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run package",
-    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
     "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
     "check-types": "tsc --noEmit",
     "lint": "eslint src"
   },

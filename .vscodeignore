@@ -3,8 +3,9 @@
 node_modules/**
 src/**
 .gitignore
+CLAUDE.md
 esbuild.js
-pnpm-lock.yaml
+package-lock.json
 **/tsconfig.json
 **/eslint.config.mjs
 **/*.map

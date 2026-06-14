@@ -1,6 +1,5 @@
 {
   "files.exclude": { "dist": false },
   "search.exclude": { "dist": true },
-  "typescript.tsc.autoDetect": "off",
-  "npm.packageManager": "pnpm"
+  "typescript.tsc.autoDetect": "off"
 }
