@@ -1,0 +1,179 @@
+{
+  "name": "simple-git",
+  "displayName": "Simple Git",
+  "description": "Simple Git brings the version control experience from JetBrains IDEs straight into your VS Code.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.120.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "simple-git",
+          "title": "Simple Git",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "simple-git": [
+        {
+          "id": "simple-git.branchView",
+          "name": "Branches",
+          "contextualTitle": "Simple Git"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "simple-git.branchView",
+        "contents": "No Git repository detected in the current workspace.",
+        "when": "workbenchState == empty"
+      }
+    ],
+    "commands": [
+      {
+        "command": "simple-git.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.fetch",
+        "title": "Fetch All",
+        "icon": "$(sync)",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.newBranchFrom",
+        "title": "New Branch from Selected…",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.checkout",
+        "title": "Checkout",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.push",
+        "title": "Push",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.pull",
+        "title": "Pull",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.pullRebase",
+        "title": "Pull into Current Branch Using Rebase",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.pullMerge",
+        "title": "Pull into Current Branch Using Merge",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.rename",
+        "title": "Rename Branch",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.deleteLocal",
+        "title": "Delete Local Branch",
+        "category": "Simple Git"
+      },
+      {
+        "command": "simple-git.deleteRemote",
+        "title": "Delete Remote Branch",
+        "category": "Simple Git"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "simple-git.fetch",
+          "when": "view == simple-git.branchView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "simple-git.refresh",
+          "when": "view == simple-git.branchView",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "simple-git.newBranchFrom",
+          "when": "view == simple-git.branchView && viewItem =~ /^gitbm-remote/",
+          "group": "1_ops@1"
+        },
+        {
+          "command": "simple-git.checkout",
+          "when": "view == simple-git.branchView && (viewItem == gitbm-local-regular || viewItem == gitbm-local-protected || viewItem =~ /^gitbm-remote/)",
+          "group": "1_ops@2"
+        },
+        {
+          "command": "simple-git.push",
+          "when": "view == simple-git.branchView && viewItem =~ /^gitbm-local/",
+          "group": "1_ops@3"
+        },
+        {
+          "command": "simple-git.pull",
+          "when": "view == simple-git.branchView && viewItem =~ /^gitbm-local.*-current/",
+          "group": "1_ops@3"
+        },
+        {
+          "command": "simple-git.pullRebase",
+          "when": "view == simple-git.branchView && viewItem =~ /^gitbm-remote/",
+          "group": "2_remote@1"
+        },
+        {
+          "command": "simple-git.pullMerge",
+          "when": "view == simple-git.branchView && viewItem =~ /^gitbm-remote/",
+          "group": "2_remote@2"
+        },
+        {
+          "command": "simple-git.rename",
+          "when": "view == simple-git.branchView && (viewItem == gitbm-local-regular || viewItem == gitbm-local-current)",
+          "group": "3_edit@1"
+        },
+        {
+          "command": "simple-git.deleteLocal",
+          "when": "view == simple-git.branchView && viewItem == gitbm-local-regular",
+          "group": "3_edit@2"
+        },
+        {
+          "command": "simple-git.deleteRemote",
+          "when": "view == simple-git.branchView && viewItem == gitbm-remote-regular",
+          "group": "3_edit@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "@types/vscode": "^1.120.0",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.4.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.0"
+  }
+}
